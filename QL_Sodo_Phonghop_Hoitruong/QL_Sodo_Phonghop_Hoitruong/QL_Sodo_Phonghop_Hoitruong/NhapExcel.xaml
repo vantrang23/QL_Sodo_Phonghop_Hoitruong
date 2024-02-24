@@ -1,0 +1,45 @@
+﻿<Window x:Class="QL_Sodo_Phonghop_Hoitruong.NhapExcel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QL_Sodo_Phonghop_Hoitruong"
+        mc:Ignorable="d"
+        Title="NhapExcel" Height="450" Width="800">
+    <Grid>
+        <Label Name="lb_nhapex" 
+               Width="780"
+               Height="46"
+               VerticalAlignment="Top"
+               Foreground="BlueViolet"             
+               Content="Vui lòng kiểm tra lại thông tin trước khi nhấn OK"
+               HorizontalContentAlignment="Center"
+               FontFamily="Tahoma"           
+               FontSize="18" RenderTransformOrigin="0.506,-0.212" Margin="10,10,10,0"
+               FontWeight="Bold"
+               />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+            <DataGrid                    
+            AutoGenerateColumns="True"
+            IsReadOnly="True" 
+             Height="314" Width="780" 
+             RenderTransformOrigin="0.497,0.382" 
+             Margin="0,20,0,0"
+             x:Name="dtg_okexcel" 
+              >
+            </DataGrid>
+        </ScrollViewer>
+        <Grid>
+            <StackPanel
+                Margin="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" Margin="0,20,100,0" Opacity="1" FontSize="14" Height="30" x:Name="txtFilePath" Width="527"/>
+                <Button Command="{Binding OKCommand}" x:Name="btn_OKexcel" Margin="0,0,10,0" Background="BlueViolet" Content="OK" Click="btn_OKexcel_Click" />
+                <Button x:Name="btn_huyexcel" Margin="0,0,10,0" Background="RED" Content="Hủy" Click="btn_huyexcel_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

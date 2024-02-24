@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLPHHTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PhienHop">
+          <Key>
+            <PropertyRef Name="IDPhienHop" />
+          </Key>
+          <Property Name="IDPhienHop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPhienHop" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mota" Type="nvarchar(max)" />
+          <Property Name="HinhThuc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgayBatDau" Type="date" Nullable="false" />
+          <Property Name="NgayKetThuc" Type="date" Nullable="false" />
+          <Property Name="ChieuDoc" Type="int" />
+          <Property Name="ChieuNgang" Type="int" />
+          <Property Name="SoDay" Type="int" />
+          <Property Name="SoHangMoiDay" Type="int" />
+          <Property Name="SoGheMoiHang" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ThongTinGhe">
+          <Key>
+            <PropertyRef Name="IDGhe" />
+            <PropertyRef Name="IDPhienHop" />
+          </Key>
+          <Property Name="STT" Type="int" />
+          <Property Name="IDGhe" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TenGhe" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChucDanh" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoUuTien" Type="int" />
+          <Property Name="IDPhienHop" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_PH_TTG">
+          <End Role="PhienHop" Type="Self.PhienHop" Multiplicity="1" />
+          <End Role="ThongTinGhe" Type="Self.ThongTinGhe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhienHop">
+              <PropertyRef Name="IDPhienHop" />
+            </Principal>
+            <Dependent Role="ThongTinGhe">
+              <PropertyRef Name="IDPhienHop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLPHHTModelStoreContainer">
+          <EntitySet Name="PhienHop" EntityType="Self.PhienHop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongTinGhe" EntityType="Self.ThongTinGhe" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_PH_TTG" Association="Self.fk_PH_TTG">
+            <End Role="PhienHop" EntitySet="PhienHop" />
+            <End Role="ThongTinGhe" EntitySet="ThongTinGhe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLPHHTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PhienHop">
+          <Key>
+            <PropertyRef Name="IDPhienHop" />
+          </Key>
+          <Property Name="IDPhienHop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPhienHop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mota" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhThuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgayBatDau" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ChieuDoc" Type="Int32" />
+          <Property Name="ChieuNgang" Type="Int32" />
+          <Property Name="SoDay" Type="Int32" />
+          <Property Name="SoHangMoiDay" Type="Int32" />
+          <Property Name="SoGheMoiHang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ThongTinGhes" Relationship="Self.fk_PH_TTG" FromRole="PhienHop" ToRole="ThongTinGhe" />
+        </EntityType>
+        <EntityType Name="ThongTinGhe">
+          <Key>
+            <PropertyRef Name="IDGhe" />
+            <PropertyRef Name="IDPhienHop" />
+          </Key>
+          <Property Name="STT" Type="Int32" />
+          <Property Name="IDGhe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenGhe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChucDanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoUuTien" Type="Int32" />
+          <Property Name="IDPhienHop" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PhienHop" Relationship="Self.fk_PH_TTG" FromRole="ThongTinGhe" ToRole="PhienHop" />
+        </EntityType>
+        <Association Name="fk_PH_TTG">
+          <End Role="PhienHop" Type="Self.PhienHop" Multiplicity="1" />
+          <End Role="ThongTinGhe" Type="Self.ThongTinGhe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhienHop">
+              <PropertyRef Name="IDPhienHop" />
+            </Principal>
+            <Dependent Role="ThongTinGhe">
+              <PropertyRef Name="IDPhienHop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLPHHTEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PhienHops" EntityType="Self.PhienHop" />
+          <EntitySet Name="ThongTinGhes" EntityType="Self.ThongTinGhe" />
+          <AssociationSet Name="fk_PH_TTG" Association="Self.fk_PH_TTG">
+            <End Role="PhienHop" EntitySet="PhienHops" />
+            <End Role="ThongTinGhe" EntitySet="ThongTinGhes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLPHHTModelStoreContainer" CdmEntityContainer="QLPHHTEntities1">
+          <EntitySetMapping Name="PhienHops">
+            <EntityTypeMapping TypeName="QLPHHTModel.PhienHop">
+              <MappingFragment StoreEntitySet="PhienHop">
+                <ScalarProperty Name="IDPhienHop" ColumnName="IDPhienHop" />
+                <ScalarProperty Name="TenPhienHop" ColumnName="TenPhienHop" />
+                <ScalarProperty Name="Mota" ColumnName="Mota" />
+                <ScalarProperty Name="HinhThuc" ColumnName="HinhThuc" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="ChieuDoc" ColumnName="ChieuDoc" />
+                <ScalarProperty Name="ChieuNgang" ColumnName="ChieuNgang" />
+                <ScalarProperty Name="SoDay" ColumnName="SoDay" />
+                <ScalarProperty Name="SoHangMoiDay" ColumnName="SoHangMoiDay" />
+                <ScalarProperty Name="SoGheMoiHang" ColumnName="SoGheMoiHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongTinGhes">
+            <EntityTypeMapping TypeName="QLPHHTModel.ThongTinGhe">
+              <MappingFragment StoreEntitySet="ThongTinGhe">
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="IDGhe" ColumnName="IDGhe" />
+                <ScalarProperty Name="TenGhe" ColumnName="TenGhe" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="ChucDanh" ColumnName="ChucDanh" />
+                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+                <ScalarProperty Name="DoUuTien" ColumnName="DoUuTien" />
+                <ScalarProperty Name="IDPhienHop" ColumnName="IDPhienHop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
